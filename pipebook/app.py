@@ -9,6 +9,7 @@ from toga.constants import COLUMN
 from toga.style import Pack
 APP_NAME = 'PipeBook'
 APP_ID = 'com.igwet.app.pipebook'
+APP_ICON = '/Users/ernest/Developer/pipebook/pipebook/resources/pipebook2.png'
 
 class PipeBookApp(toga.App):
 
@@ -94,7 +95,7 @@ class PipeBookApp(toga.App):
         self.main_window.show()
 
 def main():
-    return PipeBookApp(APP_NAME, APP_ID)
+    return PipeBookApp(APP_NAME, APP_ID, icon=APP_ICON)
 
 
 if __name__ == '__main__':
