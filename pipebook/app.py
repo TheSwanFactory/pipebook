@@ -4,7 +4,8 @@ from pathlib import Path
 import toga
 from toga.constants import COLUMN
 from toga.style import Pack
-
+APP_NAME = 'PipeBook'
+APP_ID = 'com.igwet.app.pipebook'
 
 class PipeBookApp(toga.App):
 
@@ -12,15 +13,15 @@ class PipeBookApp(toga.App):
         self.label.text = "Ready."
 
     async def action_info_dialog(self, widget):
-        await self.main_window.info_dialog('Toga', 'THIS! IS! TOGA!!')
-        self.label.text = 'Information was provided.'
+        await self.main_window.info_dialog(APP_NAME, f'Welcome to {APP_NAME}')
+        self.label.text = 'The next-generation data notebook for resilient, production-ready data pipelines.'
 
     async def action_open_file_filtered_dialog(self, widget):
         try:
             fname = await self.main_window.open_file_dialog(
-                title="Open file with Toga",
+                title=f"Open {APP_NAME} YAML file",
                 multiselect=False,
-                file_types=['doc', 'txt'],
+                file_types=['yml'],
             )
             if fname is not None:
                 self.label.text = f"File to open: {fname}"
@@ -31,7 +32,7 @@ class PipeBookApp(toga.App):
 
     async def exit_handler(self, app):
         # Return True if app should close, and False if it should remain open
-        if await self.main_window.confirm_dialog('Toga', 'Are you sure you want to quit?'):
+        if await self.main_window.confirm_dialog(APP_NAME, 'Are you sure you want to quit?'):
             print(f"Label text was '{self.label.text}' when you quit the app")
             return True
         else:
@@ -85,7 +86,7 @@ class PipeBookApp(toga.App):
         self.main_window.show()
 
 def main():
-    return PipeBookApp('PipeBook', 'com.igwet.app.pipebook')
+    return PipeBookApp(APP_NAME, APP_ID)
 
 
 if __name__ == '__main__':
