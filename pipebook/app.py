@@ -2,6 +2,7 @@ import traceback
 from pathlib import Path
 from fridaay import load_yaml
 from .io import obj2tree
+from .doc import PipeBookDoc
 
 import toga
 from toga.constants import COLUMN
@@ -26,10 +27,12 @@ class PipeBookApp(toga.App):
                 file_types=['yml'],
             )
             if fname is not None:
-                self.label.text = f"File to open: {fname}"
-                path, ext = str(fname).split(".")
+                name = str(fname)
+                self.label.text = f"File to open: {name}"
+                path, ext = name.split(".")
                 yml = load_yaml(path)
                 tree_source = obj2tree(yml)
+                doc = PipeBookDoc(self, name, tree_source)
             else:
                 self.label.text = "No file selected!"
         except ValueError:

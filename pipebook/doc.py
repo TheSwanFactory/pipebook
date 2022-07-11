@@ -1,15 +1,19 @@
 from random import choice
-from .data import obj2tree
-from toga.sources import TreeSource
-from toga.sources.tree_source import Node
-
 from collections import defaultdict, namedtuple
 
 import toga
+from toga.sources import TreeSource
+from toga.sources.tree_source import Node
 from toga.constants import COLUMN, ROW
 from toga.style import Pack
 
 class PipeBookDoc():
+
+    def __init__(self, app, name, source):
+        self.app = app
+        self.name = name
+        self.source = source
+        self.startup()
 
     # Table callback functions
     def on_select_handler(self, widget, node):
@@ -31,17 +35,20 @@ class PipeBookDoc():
 
     def startup(self):
         # Set up main window
-        self.doc_window = toga.Window(title=self.name)
+
+        self.app.window_counter += 1
+        self.window = toga.Window(title=self.name)
+        # Both self.windows.add() and self.windows += work:
+        self.app.windows += self.window
 
         # Label to show responses.
         self.label = toga.Label('Ready.', style=Pack(padding=10))
 
-        source = obj2tree()
         self.tree = toga.Tree(
-            headings=source._accessors,
+            headings=self.source._accessors,
             style=Pack(flex=1)
         )
-        self.tree.data = source
+        self.tree.data = self.source
 
         # Buttons
         btn_style = Pack(flex=1, padding=10)
@@ -59,7 +66,7 @@ class PipeBookDoc():
         )
 
         # Add the content on the main window
-        self.doc_window.content = outer_box
+        self.window.content = outer_box
 
         # Show the main window
-        self.doc_window.show()
+        self.window.show()
