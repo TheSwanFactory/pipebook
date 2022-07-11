@@ -271,7 +271,7 @@ six = ">=1.5"
 
 [[package]]
 name = "pythonnet"
-version = "3.0.0rc2"
+version = "3.0.0rc3"
 description = ".NET and Mono integration for Python"
 category = "main"
 optional = false

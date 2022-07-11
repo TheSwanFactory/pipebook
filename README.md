@@ -11,6 +11,8 @@ $ poetry install # or '$ poetry update'
 $ poetry env use python3
 $ poetry run pytest
 $ poetry run ptw
+$ poetry shell
+$ python3 -m pipebook
 ```
 ## Implementation
 
