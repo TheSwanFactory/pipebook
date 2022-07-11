@@ -1,5 +1,7 @@
 import traceback
 from pathlib import Path
+from fridaay import load_yaml
+from .obj2tree import *
 
 import toga
 from toga.constants import COLUMN
@@ -25,6 +27,8 @@ class PipeBookApp(toga.App):
             )
             if fname is not None:
                 self.label.text = f"File to open: {fname}"
+                yml = load_yaml(fname)
+                tree_source = obj2tree(yml)
             else:
                 self.label.text = "No file selected!"
         except ValueError:
