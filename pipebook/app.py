@@ -8,21 +8,12 @@ from toga.style import Pack
 
 class PipeBookApp(toga.App):
 
-    # Button callback functions
     def do_clear(self, widget, **kwargs):
         self.label.text = "Ready."
 
-        btn_open = toga.Button('Open File', on_press=self.action_open_file_dialog, style=btn_style)
-        btn_open_filtered = toga.Button(
-            'Open File (Filtered)',
-            on_press=self.action_open_file_filtered_dialog,
-            style=btn_style
-        )
-        btn_open_multi = toga.Button(
-            'Open File (Multiple)',
-            on_press=self.action_open_file_dialog_multi,
-            style=btn_style
-        )
+    async def action_info_dialog(self, widget):
+        await self.main_window.info_dialog('Toga', 'THIS! IS! TOGA!!')
+        self.label.text = 'Information was provided.'
 
     async def action_open_file_filtered_dialog(self, widget):
         try:
@@ -62,27 +53,20 @@ class PipeBookApp(toga.App):
         self.close_attempts = set()
         self.set_window_label_text(0)
 
+        btn_style = Pack(flex=1)
+        btn_info = toga.Button('Info', on_press=self.action_info_dialog, style=btn_style)
+        btn_open_filtered = toga.Button(
+            'Open File (Filtered)',
+            on_press=self.action_open_file_filtered_dialog,
+            style=btn_style
+        )
         btn_clear = toga.Button('Clear', on_press=self.do_clear, style=btn_style)
 
         # Outermost box
         box = toga.Box(
             children=[
                 btn_info,
-                btn_question,
-                btn_confirm,
-                btn_error,
-                btn_stack_trace,
-                btn_stack_trace_retry,
-                btn_open,
                 btn_open_filtered,
-                btn_open_multi,
-                btn_open_init_folder,
-                btn_save,
-                btn_select,
-                btn_select_multi,
-                btn_select_init_folder,
-                btn_open_secondary_window,
-                btn_close_secondary_window,
                 btn_clear,
                 self.label,
                 self.window_label
