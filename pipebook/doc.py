@@ -43,7 +43,7 @@ class PipeBookDoc():
             self.tree.data.remove(selection)
 
     def startup(self):
-        # Set up main window
+        # Set up doc window
 
         self.app.window_counter += 1
         self.window = toga.Window(title=self.name)
@@ -61,13 +61,15 @@ class PipeBookDoc():
 
         # Buttons
         btn_style = Pack(flex=1, padding=10)
+
         self.btn_insert = toga.Button('Insert Row', on_press=self.insert_handler, style=btn_style)
         self.btn_remove = toga.Button('Remove Row', enabled=False, on_press=self.remove_handler, style=btn_style)
         self.btn_box = toga.Box(children=[self.btn_insert, self.btn_remove], style=Pack(direction=ROW))
+        self.btn_run = toga.Button('Run and Show Frames', on_press=self.do_run, style=btn_style)
 
         # Outermost box
         outer_box = toga.Box(
-            children=[self.btn_box, self.tree, self.label],
+            children=[self.btn_run, self.btn_box, self.tree, self.label],
             style=Pack(
                 flex=1,
                 direction=COLUMN,
