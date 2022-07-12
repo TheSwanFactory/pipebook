@@ -13,31 +13,8 @@ class FrameViewer():
     def __init__(self, app, name, frame):
         self.app = app
         self.name = name
-        self.frames = frame
-
-    # Pipe Run functions
-
-    async def do_run(self, widget):
-        self.pipe.run()
-        self.frames = [FrameViewer(f) for f in self.pipe.frames]
-
-    # Table callback functions
-    def on_select_handler(self, widget, node):
-        if node is not None and node.name:
-            self.label.text = f'You selected node: {node.name}'
-            self.btn_remove.enabled = True
-        else:
-            self.label.text = 'No node selected'
-            self.btn_remove.enabled = False
-
-    # Button callback functions
-    def insert_handler(self, widget, **kwargs):
-        self.tree.data
-
-    def remove_handler(self, widget, **kwargs):
-        selection = self.tree.selection
-        if selection.title:
-            self.tree.data.remove(selection)
+        self.frame = frame
+        self.startup()
 
     def startup(self):
         # Set up main window
@@ -50,21 +27,16 @@ class FrameViewer():
         # Label to show responses.
         self.label = toga.Label('Ready.', style=Pack(padding=10))
 
-        self.tree = toga.Tree(
-            headings=self.source._accessors,
-            style=Pack(flex=1)
+        self.table = toga.Table(
+            headings=self.frame.columns,
+            data=self.frame,
+            multiple_select=True,
+            style=Pack(flex=1, padding_left=5),
         )
-        self.tree.data = self.source
-
-        # Buttons
-        btn_style = Pack(flex=1, padding=10)
-        self.btn_insert = toga.Button('Insert Row', on_press=self.insert_handler, style=btn_style)
-        self.btn_remove = toga.Button('Remove Row', enabled=False, on_press=self.remove_handler, style=btn_style)
-        self.btn_box = toga.Box(children=[self.btn_insert, self.btn_remove], style=Pack(direction=ROW))
 
         # Outermost box
         outer_box = toga.Box(
-            children=[self.btn_box, self.tree, self.label],
+            children=[self.table, self.label],
             style=Pack(
                 flex=1,
                 direction=COLUMN,
