@@ -8,21 +8,18 @@ from toga.sources.tree_source import Node
 from toga.constants import COLUMN, ROW
 from toga.style import Pack
 
-class PipeBookDoc():
+class FrameViewer():
 
-    def __init__(self, app, name, source):
+    def __init__(self, app, name, frame):
         self.app = app
         self.name = name
-        self.source = source
-        self.pipe = Pipe(source)
-        self.frames = []
-        self.startup()
+        self.frames = frame
 
     # Pipe Run functions
 
     async def do_run(self, widget):
         self.pipe.run()
-        self.frames = [FrameViewer(app, n, f) for n,f self.pipe.frames.items()]
+        self.frames = [FrameViewer(f) for f in self.pipe.frames]
 
     # Table callback functions
     def on_select_handler(self, widget, node):
