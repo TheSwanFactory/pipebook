@@ -1,7 +1,6 @@
 import traceback
 from pathlib import Path
-from fridaay import load_yaml
-from .io import obj2tree
+from fridaay import load_yaml, Registry
 from .doc import PipeBookDoc
 
 import toga
@@ -32,8 +31,7 @@ class PipeBookApp(toga.App):
                 self.label.text = f"File to open: {name}"
                 path, ext = name.split(".")
                 yml = load_yaml(path)
-                tree_source = obj2tree(yml)
-                doc = PipeBookDoc(self, name, tree_source)
+                doc = PipeBookDoc(self, name, yml)
             else:
                 self.label.text = "No file selected!"
         except ValueError:
@@ -53,6 +51,7 @@ class PipeBookApp(toga.App):
 
     def startup(self):
         # Set up main window
+        self.registry = Registry()
         self.main_window = toga.MainWindow(title=self.name)
         self.on_exit = self.exit_handler
 

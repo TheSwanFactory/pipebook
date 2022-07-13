@@ -1,6 +1,7 @@
 from random import choice
 from collections import defaultdict, namedtuple
 from fridaay import Pipe
+from .io import obj2tree
 
 import toga
 from toga.sources import TreeSource
@@ -10,11 +11,11 @@ from toga.style import Pack
 
 class PipeBookDoc():
 
-    def __init__(self, app, name, source):
+    def __init__(self, app, name, yml):
         self.app = app
         self.name = name
-        self.source = source
-        self.pipe = Pipe(source)
+        self.source = obj2tree(yml)
+        self.pipe = Pipe(app.registry, yml)
         self.frames = []
         self.startup()
 
@@ -22,7 +23,7 @@ class PipeBookDoc():
 
     async def do_run(self, widget):
         self.pipe.run()
-        self.frames = [FrameViewer(app, n, f) for n,f self.pipe.frames.items()]
+        self.frames = [FrameViewer(app, n, f) for n,f in self.pipe.frames.items()]
 
     # Table callback functions
     def on_select_handler(self, widget, node):
