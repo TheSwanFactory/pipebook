@@ -2,6 +2,7 @@ import traceback
 from pathlib import Path
 from fridaay import load_yaml, Registry
 from .doc import PipeBookDoc
+import importlib.resources
 
 import toga
 from toga.constants import COLUMN

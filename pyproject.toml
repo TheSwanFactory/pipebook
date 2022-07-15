@@ -6,8 +6,8 @@ authors = ["Ernest Prabhakar <ernest.prabhakar@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fridaay = "^0.1.0"
 toga = "0.3.0.dev34"
+fridaay = "^0.2.1"
 
 [tool.poetry.dev-dependencies]
 ymm = "^0.6.1"
