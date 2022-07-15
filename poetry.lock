@@ -82,7 +82,7 @@ python-versions = "*"
 
 [[package]]
 name = "fridaay"
-version = "0.2.1"
+version = "0.2.2"
 description = "Format Representing Interdependent Data Actions As YAML"
 category = "main"
 optional = false
