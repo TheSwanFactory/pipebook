@@ -7,6 +7,7 @@ class FrameData(Source):
     def __init__(self, raw):
         super().__init__()
         self.raw = raw
+        self.columns = raw.columns
 
     def __len__(self):
         return len(self.raw)

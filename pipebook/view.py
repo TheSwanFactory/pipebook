@@ -1,6 +1,7 @@
 from random import choice
 from collections import defaultdict, namedtuple
 from fridaay import Pipe
+from .data import FrameData
 
 import toga
 from toga.sources import TreeSource
@@ -10,10 +11,10 @@ from toga.style import Pack
 
 class FrameView():
 
-    def __init__(self, app, name, frame):
+    def __init__(self, app, name, raw_data):
         self.app = app
         self.name = name
-        self.frame = frame
+        self.data = FrameData(raw_data)
         self.startup()
 
     def startup(self):
@@ -28,8 +29,8 @@ class FrameView():
         self.label = toga.Label('Ready.', style=Pack(padding=10))
 
         self.table = toga.Table(
-            headings=self.frame.columns,
-            data=self.frame,
+            headings=self.data.columns,
+            data=self.data,
             multiple_select=True,
             style=Pack(flex=1, padding_left=5),
         )
