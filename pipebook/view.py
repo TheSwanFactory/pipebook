@@ -8,7 +8,7 @@ from toga.sources.tree_source import Node
 from toga.constants import COLUMN, ROW
 from toga.style import Pack
 
-class FrameViewer():
+class FrameView():
 
     def __init__(self, app, name, frame):
         self.app = app

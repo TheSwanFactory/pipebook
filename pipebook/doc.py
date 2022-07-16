@@ -2,7 +2,7 @@ from random import choice
 from collections import defaultdict, namedtuple
 from fridaay import Pipe
 from .io import obj2tree
-from .frame_viewer import FrameViewer
+from .frame_viewer import FrameView
 
 import toga
 from toga.sources import TreeSource
@@ -24,7 +24,7 @@ class PipeBookDoc():
 
     async def do_run(self, widget):
         self.pipe.run()
-        self.frames = [FrameViewer(self.app, n, f) for n,f in self.pipe.data.items()]
+        self.frames = [FrameView(self.app, n, f) for n,f in self.pipe.data.items()]
 
     # Table callback functions
     def on_select_handler(self, widget, node):
