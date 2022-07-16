@@ -13,7 +13,7 @@ class FrameData(Source):
         return len(self.raw)
 
     def __getitem__(self, index):
-        return self.raw[index]
+        return self.raw.iloc[index]
 
     def index(self, entry):
         return self.raw.index(entry)
