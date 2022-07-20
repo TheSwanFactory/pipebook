@@ -10,6 +10,7 @@ from toga.style import Pack
 APP_NAME = 'PipeBook'
 APP_ID = 'com.igwet.app.pipebook'
 APP_ICON = '/Users/ernest/Developer/pipebook/pipebook/resources/pipebook2.png'
+DEMO_PIPE="demo_pets"
 
 class PipeBookApp(toga.App):
 
@@ -21,6 +22,12 @@ class PipeBookApp(toga.App):
         self.label.text = f"File to open: {name}"
         path, ext = name.split(".")
         yml = load_yaml(path)
+        doc = PipeBookDoc(self, name, yml)
+        return doc
+
+    def load_demo(self, name=DEMO_PIPE):
+        pipe_path = path_resource(PKG_ID, PIPE_FOLDER)
+        yml = load_yaml(name, pipe_path)
         doc = PipeBookDoc(self, name, yml)
         return doc
 

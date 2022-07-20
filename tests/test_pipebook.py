@@ -1,8 +1,6 @@
 from pipebook import __version__
 from .conftest import *
 
-DEMO_PIPE="demo_pets"
-
 def test_version():
     assert __version__ == '0.1.0'
 
@@ -27,4 +25,11 @@ def test_yaml():
     app = PipeBookApp(APP_NAME, APP_ID)
     app.startup()
     doc = PipeBookDoc(app, DEMO_PIPE, yml)
+    assert doc
+
+def skip_test_demo():
+    app = PipeBookApp(APP_NAME, APP_ID)
+    app.startup()
+    assert app.registry
+    doc = app.load_demo()
     assert doc
