@@ -1,6 +1,6 @@
 import traceback
 from pathlib import Path
-from fridaay import load_yaml, Registry
+from fridaay import *
 from .doc import PipeBookDoc
 import importlib.resources
 
@@ -104,6 +104,7 @@ class PipeBookApp(toga.App):
 
         # Show the main window
         self.main_window.show()
+        self.load_demo()
 
 def main():
     return PipeBookApp(APP_NAME, APP_ID, icon=APP_ICON)
