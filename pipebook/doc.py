@@ -15,6 +15,7 @@ class PipeBookDoc():
     def __init__(self, app, name, yml):
         self.app = app
         self.name = name
+        self.yaml = yml
         self.source = obj2tree(yml)
         self.pipe = Pipe(app.registry, yml)
         self.frames = []

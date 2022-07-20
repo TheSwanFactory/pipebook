@@ -22,9 +22,7 @@ def test_yaml():
     yml = load_yaml(DEMO_PIPE, pipe_path)
     assert yml
 
-def skip_test_demo():
-    app = PipeBookApp(APP_NAME, APP_ID)
-    app.startup()
-    assert app.registry
+def test_demo():
+    app = get_app()
     doc = app.load_demo()
     assert doc

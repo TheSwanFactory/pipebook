@@ -109,7 +109,6 @@ class PipeBookApp(toga.App):
 def main():
     return PipeBookApp(APP_NAME, APP_ID, icon=APP_ICON)
 
-
 if __name__ == '__main__':
     app = main()
     app.main_loop()
