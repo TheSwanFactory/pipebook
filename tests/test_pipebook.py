@@ -23,3 +23,8 @@ def test_yaml():
     assert pipe_path
     yml = load_yaml(DEMO_PIPE, pipe_path)
     assert yml
+
+    app = PipeBookApp(APP_NAME, APP_ID)
+    app.startup()
+    doc = PipeBookDoc(app, DEMO_PIPE, yml)
+    assert doc
