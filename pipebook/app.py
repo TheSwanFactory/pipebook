@@ -16,6 +16,14 @@ class PipeBookApp(toga.App):
     def do_clear(self, widget, **kwargs):
         self.label.text = "Ready."
 
+    def open_document(self, fname):
+        name = str(fname)
+        self.label.text = f"File to open: {name}"
+        path, ext = name.split(".")
+        yml = load_yaml(path)
+        doc = PipeBookDoc(self, name, yml)
+        return doc
+
     async def action_info_dialog(self, widget):
         await self.main_window.info_dialog(APP_NAME, f'Welcome to {APP_NAME}')
         self.label.text = 'The next-generation data notebook for resilient, production-ready data pipelines.'
@@ -28,11 +36,7 @@ class PipeBookApp(toga.App):
                 file_types=['yml'],
             )
             if fname is not None:
-                name = str(fname)
-                self.label.text = f"File to open: {name}"
-                path, ext = name.split(".")
-                yml = load_yaml(path)
-                doc = PipeBookDoc(self, name, yml)
+                self.open_document(fname)
             else:
                 self.label.text = "No file selected!"
         except ValueError:
