@@ -1,6 +1,8 @@
 from pipebook import __version__
 from .conftest import *
 
+DEMO_PIPE="demo_pets"
+
 def test_version():
     assert __version__ == '0.1.0'
 
@@ -19,3 +21,5 @@ def test_yaml():
     assert PKG_ID in str(path)
     pipe_path = path_resource(PKG_ID, PIPE_FOLDER)
     assert pipe_path
+    yml = load_yaml(DEMO_PIPE, pipe_path)
+    assert yml
