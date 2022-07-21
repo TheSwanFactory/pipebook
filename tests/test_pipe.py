@@ -11,6 +11,6 @@ def test_yaml(doc):
     assert doc.yaml
 
 def test_run(doc):
+    assert len(doc.pipe.data) == 0
     doc.pipe.run()
-    data = doc.pipe.data
-    assert len(data) > 0
+    assert len(doc.pipe.data) > 0
