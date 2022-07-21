@@ -1,5 +1,3 @@
-from random import choice
-from collections import defaultdict, namedtuple
 from fridaay import Pipe
 from .data import FrameData
 

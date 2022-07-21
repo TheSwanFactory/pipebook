@@ -1,3 +1,4 @@
+from collections import namedtuple
 import toga
 from toga.constants import COLUMN, ROW
 from toga.sources import Source
@@ -10,18 +11,16 @@ class FrameData(Source):
         super().__init__()
         self.raw = raw
         self.columns = raw.columns.to_list()
+        self.struct = namedtuple("row", ['index']+self.columns)
+        self.data = [self.struct(*r) for r in self.raw.itertuples()]
 
     def __len__(self):
-        return len(self.raw)
+        return len(self.data)
 
     def __getitem__(self, index):
         print('__getitem__',index)
-        series = self.raw.iloc[index]
-        keys = np.append(series.index, INDEX_KEY)
-        values = np.append(series, index)
-        return tuple(values)
-        #return tuple(zip(keys, values))
+        return self.data[index]
 
-    def index(self, column_name):
-        print('index',column_name)
-        return self.columns.index(column_name)
+    def index(self, entry):
+        print('index',entry)
+        return self.data.index(entry)

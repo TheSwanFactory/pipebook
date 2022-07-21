@@ -27,13 +27,6 @@ def test_frames(doc):
         row = frame.__getitem__(0)
         assert isinstance(row, Hashable)
         assert len(row) > 0
-
-        col = frame.index('Name')
-        print(col)
-        assert col == 0
-
-        el = row[col]
-        print(el)
-        assert el
-        assert 'n' in el
-        #assert 'n' in el[1]
+        print(row)
+        print(row.Name)
+        assert 'n' in row.Name
