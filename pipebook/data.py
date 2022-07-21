@@ -10,7 +10,7 @@ class FrameData(Source):
     def __init__(self, raw):
         super().__init__()
         self.raw = raw
-        self.columns = raw.columns.to_list()
+        self.columns = [c.lower() for c in raw.columns]
         self.struct = namedtuple("row", [INDEX_KEY]+self.columns)
         self.data = [self.struct(*r) for r in self.raw.itertuples()]
 

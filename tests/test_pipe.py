@@ -28,5 +28,5 @@ def test_frames(doc):
         assert isinstance(row, Hashable)
         assert len(row) > 0
         print(row)
-        print(row.Name)
-        assert 'n' in row.Name
+        print(row.name)
+        assert 'n' in row.name
