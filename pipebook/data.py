@@ -1,20 +1,25 @@
 import toga
 from toga.constants import COLUMN, ROW
 from toga.sources import Source
+import numpy as np
+INDEX_KEY="#"
 
 class FrameData(Source):
 
     def __init__(self, raw):
         super().__init__()
         self.raw = raw
-        self.columns = raw.columns
+        self.columns = raw.columns.to_list()
 
     def __len__(self):
         return len(self.raw)
 
     def __getitem__(self, index):
         series = self.raw.iloc[index]
-        return tuple(zip(series.index,series))
+        keys = np.append(series.index, INDEX_KEY)
+        values = np.append(series, index)
+        return tuple(zip(keys, values))
 
-    def index(self, entry):
-        return self.raw.index(entry)
+    def index(self, column_name):
+        print(dir(self.columns))
+        return self.columns.index(column_name)

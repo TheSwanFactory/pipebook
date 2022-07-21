@@ -35,4 +35,4 @@ def test_frames(doc):
 
         col = frame.index('Name')
         print(col)
-        assert col
+        assert col == 0
