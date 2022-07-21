@@ -15,11 +15,13 @@ class FrameData(Source):
         return len(self.raw)
 
     def __getitem__(self, index):
+        print('__getitem__',index)
         series = self.raw.iloc[index]
         keys = np.append(series.index, INDEX_KEY)
         values = np.append(series, index)
-        return tuple(zip(keys, values))
+        return tuple(values)
+        #return tuple(zip(keys, values))
 
     def index(self, column_name):
-        print(dir(self.columns))
+        print('index',column_name)
         return self.columns.index(column_name)
