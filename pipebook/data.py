@@ -14,7 +14,7 @@ class FrameData(Source):
 
     def __getitem__(self, index):
         series = self.raw.iloc[index]
-        return tuple(zip(series,series.index))
+        return (zip(series.index,series))
 
     def index(self, entry):
         return self.raw.index(entry)

@@ -23,7 +23,7 @@ def append_dict(l, root, dobj):
         t = typeof(v)
         s = len(v) if not is_num(t) else "-"
         child = root._source.append(root, **d(l, k, t, s, v))
-        print(f'dict[{l}]: {k}<{t}>')
+        #print(f'dict[{l}]: {k}<{t}>')
         if ('dict' == t):
             append_dict(l+1, child, v)
         elif ('list' == t):
@@ -35,7 +35,7 @@ def append_list(l, root, lobj):
         t = typeof(v)
         s = len(v) if not is_num(t) else "-"
         child = root._source.append(root, **d(l, k, t, s, v))
-        print(f'list[{l}]: {k}<{t}>')
+        #print(f'list[{l}]: {k}<{t}>')
         if ('dict' == t):
             append_dict(l+1, child, v)
         elif ('list' == t):
