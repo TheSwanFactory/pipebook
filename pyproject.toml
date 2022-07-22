@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pipebook"
-version = "0.1.0"
+version = "0.1.1-alpha.0"
 description = "Next-generation notebook for resilient, production-ready data pipelines"
 authors = ["Ernest Prabhakar <ernest.prabhakar@gmail.com>"]
 
