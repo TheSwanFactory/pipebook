@@ -16,9 +16,11 @@ $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-po
 # WINDOWS: (Invoke-WebRequest -Uri https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py -UseBasicParsing).Content | python -
 ```
 
-### Running PipeBook
+### Running PipeBook from Git
 
 ```
+$ git clone https://github.com/TheSwanFactory/pipebook.git
+$ cd pipebook
 $ poetry install # OR: '$ poetry update'
 $ poetry run python -m pipebook
 ```
