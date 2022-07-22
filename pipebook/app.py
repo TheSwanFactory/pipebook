@@ -1,8 +1,8 @@
 import traceback
 from pathlib import Path
-from fridaay import load_yaml
-from .io import obj2tree
+from fridaay import *
 from .doc import PipeBookDoc
+import importlib.resources
 
 import toga
 from toga.constants import COLUMN
@@ -10,11 +10,26 @@ from toga.style import Pack
 APP_NAME = 'PipeBook'
 APP_ID = 'com.igwet.app.pipebook'
 APP_ICON = '/Users/ernest/Developer/pipebook/pipebook/resources/pipebook2.png'
+DEMO_PIPE="demo_pets"
 
 class PipeBookApp(toga.App):
 
     def do_clear(self, widget, **kwargs):
         self.label.text = "Ready."
+
+    def open_document(self, fname):
+        name = str(fname)
+        self.label.text = f"File to open: {name}"
+        path, ext = name.split(".")
+        yml = load_yaml(path)
+        doc = PipeBookDoc(self, name, yml)
+        return doc
+
+    def load_demo(self, name=DEMO_PIPE):
+        pipe_path = path_resource(PKG_ID, PIPE_FOLDER)
+        yml = load_yaml(name, pipe_path)
+        doc = PipeBookDoc(self, name, yml)
+        return doc
 
     async def action_info_dialog(self, widget):
         await self.main_window.info_dialog(APP_NAME, f'Welcome to {APP_NAME}')
@@ -28,12 +43,7 @@ class PipeBookApp(toga.App):
                 file_types=['yml'],
             )
             if fname is not None:
-                name = str(fname)
-                self.label.text = f"File to open: {name}"
-                path, ext = name.split(".")
-                yml = load_yaml(path)
-                tree_source = obj2tree(yml)
-                doc = PipeBookDoc(self, name, tree_source)
+                self.open_document(fname)
             else:
                 self.label.text = "No file selected!"
         except ValueError:
@@ -53,6 +63,7 @@ class PipeBookApp(toga.App):
 
     def startup(self):
         # Set up main window
+        self.registry = Registry()
         self.main_window = toga.MainWindow(title=self.name)
         self.on_exit = self.exit_handler
 
@@ -93,10 +104,10 @@ class PipeBookApp(toga.App):
 
         # Show the main window
         self.main_window.show()
+        self.load_demo()
 
 def main():
     return PipeBookApp(APP_NAME, APP_ID, icon=APP_ICON)
-
 
 if __name__ == '__main__':
     app = main()

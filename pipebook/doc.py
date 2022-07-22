@@ -1,5 +1,6 @@
-from random import choice
-from collections import defaultdict, namedtuple
+from fridaay import Pipe
+from .io import obj2tree
+from .view import FrameView
 
 import toga
 from toga.sources import TreeSource
@@ -9,11 +10,20 @@ from toga.style import Pack
 
 class PipeBookDoc():
 
-    def __init__(self, app, name, source):
+    def __init__(self, app, name, yml):
         self.app = app
         self.name = name
-        self.source = source
+        self.yaml = yml
+        self.source = obj2tree(yml)
+        self.pipe = Pipe(app.registry, yml)
+        self.frames = []
         self.startup()
+
+    # Pipe Run functions
+
+    async def do_run(self, widget):
+        self.pipe.run()
+        self.frames = [FrameView(self.app, n, d) for n,d in self.pipe.data.items()]
 
     # Table callback functions
     def on_select_handler(self, widget, node):
@@ -34,7 +44,7 @@ class PipeBookDoc():
             self.tree.data.remove(selection)
 
     def startup(self):
-        # Set up main window
+        # Set up doc window
 
         self.app.window_counter += 1
         self.window = toga.Window(title=self.name)
@@ -52,13 +62,15 @@ class PipeBookDoc():
 
         # Buttons
         btn_style = Pack(flex=1, padding=10)
+
         self.btn_insert = toga.Button('Insert Row', on_press=self.insert_handler, style=btn_style)
         self.btn_remove = toga.Button('Remove Row', enabled=False, on_press=self.remove_handler, style=btn_style)
         self.btn_box = toga.Box(children=[self.btn_insert, self.btn_remove], style=Pack(direction=ROW))
+        self.btn_run = toga.Button('Run and Show Frames', on_press=self.do_run, style=btn_style)
 
         # Outermost box
         outer_box = toga.Box(
-            children=[self.btn_box, self.tree, self.label],
+            children=[self.btn_run, self.btn_box, self.tree, self.label],
             style=Pack(
                 flex=1,
                 direction=COLUMN,
