@@ -32,6 +32,7 @@ $ poetry run ptw
 
 ## Releases
 ```
+$ poetry update
 $ poetry version patch
 $ poetry build && poetry publish
 $ poetry version prepatch

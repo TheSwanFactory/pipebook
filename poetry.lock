@@ -82,7 +82,7 @@ python-versions = "*"
 
 [[package]]
 name = "fridaay"
-version = "0.2.2"
+version = "0.2.3"
 description = "Format Representing Interdependent Data Actions As YAML"
 category = "main"
 optional = false
@@ -213,7 +213,7 @@ email = ["email-validator (>=1.0.3)"]
 
 [[package]]
 name = "pygobject"
-version = "3.42.1"
+version = "3.42.2"
 description = "Python bindings for GObject Introspection"
 category = "main"
 optional = false
@@ -281,7 +281,7 @@ six = ">=1.5"
 
 [[package]]
 name = "pythonnet"
-version = "3.0.0rc3"
+version = "3.0.0rc4"
 description = ".NET and Mono integration for Python"
 category = "main"
 optional = false
@@ -433,7 +433,7 @@ jmespath = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "54203565cd2bf7cc8c52c9429f071fb3e66eb18defe06fe5034cd662b792df2e"
+content-hash = "5ed8479cfb40ce285f00aec0fa1df8a54a3a70d701f1c57915429a88e0254c84"
 
 [metadata.files]
 atomicwrites = []
@@ -624,9 +624,7 @@ pydantic = [
     {file = "pydantic-1.9.1-py3-none-any.whl", hash = "sha256:4988c0f13c42bfa9ddd2fe2f569c9d54646ce84adc5de84228cfe83396f3bd58"},
     {file = "pydantic-1.9.1.tar.gz", hash = "sha256:1ed987c3ff29fff7fd8c3ea3a3ea877ad310aae2ef9889a119e22d3f2db0691a"},
 ]
-pygobject = [
-    {file = "PyGObject-3.42.1.tar.gz", hash = "sha256:80d6a3ad1630e9d1edf31b9e9fad9a894c57e18545a3c95ef0044ac4042b8620"},
-]
+pygobject = []
 pyparsing = [
     {file = "pyparsing-3.0.9-py3-none-any.whl", hash = "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"},
     {file = "pyparsing-3.0.9.tar.gz", hash = "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb"},
