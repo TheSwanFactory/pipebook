@@ -5,6 +5,14 @@ A graphical user interface based on [The Data Config](https://benn.substack.com/
 
 See the introductory [PipeBook](https://ihack.us/2022/06/30/pipebook-yml-reimagining-notebooks-as-resilient-data-pipelines/) blog post.
 
+## Three Big Ideas
+
+1. Data Actions: new atomic unit for pipelines and workflows
+2. FRIDAAY: YAML as the universal format for composing Data Actions
+3. PipeBook: Richer UX for Resilient pipelines
+
+BHAG: Rationalize the modern data stack (and related industries)
+
 ## Usage
 
 Use `[poetry](https://python-poetry.org/docs/)` to manage both dependencies and the virtual environment:
@@ -22,7 +30,7 @@ $ curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-po
 $ git clone https://github.com/TheSwanFactory/pipebook.git
 $ cd pipebook
 $ poetry install # OR: '$ poetry update'
-$ poetry run python -m pipebook
+$ poetry run python3 -m pipebook
 ```
 ## Development
 
